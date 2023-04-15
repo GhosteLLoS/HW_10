@@ -9,13 +9,13 @@ def input_errors(func):
     return inner
 
 
-class Field():
+class Field:
     def __init__(self, value) -> None:
         self.value = value
     
     def __str__(self):
-        return self
-
+        return self.value
+    
 
 class Name(Field):
     ...
@@ -41,6 +41,7 @@ class Addressbook(UserDict):
 
 contacts = Addressbook()
 
+
 @input_errors
 def add(*args):
 
@@ -52,18 +53,20 @@ def add(*args):
     contacts.add_record(rec)
     return f'contact {name} and phone_number {phone} adding successfully'
 
+
 @input_errors
 def change_phone_number(*args):
-    name = Name(args[0])
-    new_phone = Phone(args[1])
+    name = (args[0])
+    new_phone = (args[1])
     if contacts.get(name):
         contacts[name] = new_phone
         return f"Phone number for contact {name} changed"
     return f"No contact with name {name}"
 
+
 @input_errors
 def print_phone_number(*args):
-    name = Name(args[0])
+    name = (args[0])
     if contacts.get(name):
         return contacts[name]
     return f"No contact with name {name}"
@@ -85,7 +88,8 @@ def good_bye(*args):
 
 def no_command(*args):
     return "Unknown command, try again"
-   
+
+
 COMMANDS = {'hello': hello,
             'add': add,
             'good bye': good_bye,
